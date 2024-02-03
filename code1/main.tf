@@ -12,13 +12,17 @@ provider "aws" {
   region = "us-east-2"
 }
 
-resource "aws_iam_group" "developers" {
-  name = "developers"
+resource "aws_iam_group" "ansiblegroup" {
+  name = "ansiblegroup"
 
 }
 
-resource "aws_iam_user" "lb" {
-  name = "yomi13"
+resource "aws_iam_user" "ansible" {
+  name = "ansible"
 
 }
 
+resource "aws_iam_user_group_membership" "ansible_membership" {
+  user = aws_iam_user.ansible.name
+  groups = [aws_iam_group.ansiblegroup.name]
+}
